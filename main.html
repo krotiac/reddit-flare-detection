@@ -1,64 +1,140 @@
-<!doctype html>
-<html>
+```html
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Reddit Flair Detector</title> 
-    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-   <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">-->
-   <link href="{{ url_for('static',filename = 'style.css') }}" rel="stylesheet" type="text/css">
-   <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/"><img src="https://images-na.ssl-images-amazon.com/images/I/418PuxYS63L.png" class="center" width="200" height="200"></a>
-      </div>
-   </div>
- </head>
- <head><h1 style="color: black">Reddit Flair Detector</h1></head>
- <head>
-  <style>
-     body {
-        background-image: url("../static/bbb.png");
-     }
-  </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reddit Flair Detector</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='bbb.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .page-header {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .page-header h1 {
+            color: black;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .formbox {
+            margin-top: 30px;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
+<body>
 
-<div class="formbox">
-<form action="{{ url_for('main') }}" method="POST">
-    <fieldset>
-      
-        <b style="text-align:center;">Enter the post URL from Reddit India:</b>
-        <input name="url" type="text" required>
-        <br>
-        <br>
-        <input type="submit" class="btn btn-primary btn-block btn-large">
-        
-    
-    
-</fieldset>
+    <!-- Header / Logo -->
+    <header class="page-header">
+        <a href="/">
+            <img
+                src="https://images-na.ssl-images-amazon.com/images/I/418PuxYS63L.png"
+                class="logo"
+                width="200"
+                height="200"
+                alt="Reddit Flair Detector"
+            >
+        </a>
 
-</form>
-   <!--<div> 
-       <form method = "GET" action="/stats">
-        <div class="form-actions">
-          <button class="btn btn-primary btn-block btn-large" type="submit">Statistics</button>
-        </div>-->
+        <h1>Reddit Flair Detector</h1>
+    </header>
+
+    <!-- URL Input Form -->
+    <div class="formbox">
+
+        <form action="{{ url_for('main') }}" method="POST">
+
+            <fieldset>
+
+                <b>Enter the post URL from Reddit India:</b>
+
+                <input
+                    name="url"
+                    type="text"
+                    required
+                    placeholder="Enter Reddit post URL"
+                >
+
+                <br>
+                <br>
+
+                <input
+                    type="submit"
+                    class="btn btn-primary btn-block btn-large"
+                    value="Predict Flair"
+                >
+
+            </fieldset>
+
+        </form>
+
     </div>
-<br>
-<div class="result" align="center">
-    {% if result %}
-    	{% for variable, value in original_input.items() %}
-    		<b>{{ variable }}</b> : {{ value }}
-    	{% endfor %}
-		<br>
-    	<br> Predicted flair:
-   		<p style="font-size:50px">{{ result }}</p>
-    {% endif %}
-</div>
 
-<div style="position: absolute;;left:50%;transform:translate(-50%);bottom:0;width:100%;padding: 2px;font-size: 13px;"><h4>Created by  <a href = https://github.com/pranay-ar> Pranay Reddy</a></h4></div>
+    <!-- Prediction Result -->
+    <div class="result">
+
+        {% if result %}
+
+            {% for variable, value in original_input.items() %}
+                <b>{{ variable }}</b> : {{ value }}
+            {% endfor %}
+
+            <br>
+            <br>
+
+            <span>Predicted flair:</span>
+
+            <p style="font-size: 50px;">
+                {{ result }}
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <h4>Reddit Flair Detector</h4>
+    </footer>
+
+</body>
 
 </html>
+```
